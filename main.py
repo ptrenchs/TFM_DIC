@@ -190,7 +190,7 @@ def procesado_muDIC(path, rectangulo):
     dic_job = dic.DICAnalysis(inputs)
     results = dic_job.run()
     fields = dic.Fields(results)
-    true_strain = fields.true_strain()
+    # true_strain = fields.true_strain()
     viz = dic.Visualizer(fields,images=image_stack)
     
     # ruta = crear_carpeta(ruta = '/content/Resoltado')
@@ -199,7 +199,10 @@ def procesado_muDIC(path, rectangulo):
     ruta_salida = ruta_ + '.mp4'
 
     for i in range(len(image_stack)):
-        viz.show(field="True strain", frame = i, ruta_save= ruta_ + '/' + f"frame_{i+1}.png")
+        try:
+            viz.show(field="True strain", frame = i, ruta_save= ruta_ + '/' + f"frame_{i+1}.png")
+        except:
+            break
         frame = cv2.imread(ruta_ + '/' + f"frame_{i+1}.png")
         if i == 0:
             height, width, _ = frame.shape
