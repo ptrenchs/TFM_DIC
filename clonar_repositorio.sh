@@ -12,12 +12,12 @@ else
     git clone "$REPO_URL" "$DIRECTORIO"
     
     # Buscar requirements.txt dentro del repositorio clonado
-    REQ_FILE=$(find "$DIRECTORIO" -name "requirements.txt" 2>/dev/null | head -n 1)
+    REQ_FILE_0=$(find "$DIRECTORIO" -name "requirements.txt" 2>/dev/null | head -n 1)
     
-    if [ -n "$REQ_FILE" ]; then
-        echo "Archivo requirements.txt encontrado en: $REQ_FILE"
+    if [ -n "$REQ_FILE_0" ]; then
+        echo "Archivo requirements.txt encontrado en: $REQ_FILE_0"
         echo "Instalando dependencias..."
-        pip install -r "$REQ_FILE"
+        pip install -r "$REQ_FILE_0"
     else
         echo "No se encontró un archivo requirements.txt en el repositorio."
     fi
