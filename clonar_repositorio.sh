@@ -39,6 +39,7 @@ else
         FRASE_NUEVA='if type(ruta_save) == str: plt.savefig(ruta_save, dpi=300)'
 
         sed -i "s|$FRASE_ORIGINAL|$FRASE_NUEVA|g" $REQ_FILE
+    fi
 fi
 
     
