@@ -194,7 +194,7 @@ def procesado_muDIC(path, rectangulo):
     viz = dic.Visualizer(fields,images=image_stack)
     
     # ruta = crear_carpeta(ruta = '/content/Resoltado')
-    ruta_ = ruta_carpeta + '/Resoltado'
+    ruta_ = crear_carpeta(ruta_carpeta + '/Resoltado')
 
     ruta_salida = ruta_ + '.mp4'
 
