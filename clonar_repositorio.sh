@@ -17,13 +17,12 @@ else
     if [ -n "$REQ_FILE_0" ]; then
         echo "Archivo requirements.txt encontrado en: $REQ_FILE_0"
         echo "Instalando dependencias..."
-        clear
+
         pip install -r "$REQ_FILE_0"
-        clear
+        
         pip install dill
-        clear
+
         pip install noise
-        clear
 
     else
         echo "No se encontró un archivo requirements.txt en el repositorio."
@@ -38,7 +37,7 @@ else
         sed -i 's|plt.show()|if isinstance(ruta_save, str): plt.savefig(ruta_save, dpi=300)|g' "$REQ_FILE"
     fi
 fi
-clear
+
     
     
 
