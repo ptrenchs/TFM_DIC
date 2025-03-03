@@ -14,7 +14,110 @@ except:
 import muDIC as dic
 from muDIC import vlab
 
-def show_image_matplotlib(image, Xc1=0, Xc2=2, Yc1=0, Yc2=2):
+
+
+
+def ordenar_lista_num(lista):
+
+    def num_inicio(nombre, fin = False):
+        if fin:
+            nombre = ''.join([i for i in nombre][::-1])
+            for i,rt in enumerate(nombre):
+                if not rt.isnumeric():
+                    if nombre[:i] == '':
+                        return ''
+                    return int(''.join([j for j in nombre[:i]][::-1]))
+                    break
+
+        else:
+            for i,rt in enumerate(nombre):
+                if not rt.isnumeric():
+                    if nombre[:i] == '':
+                        return ''
+                    return int(nombre[:i])
+                    break
+    
+    def informacion_ruta(ruta):
+        while True:
+            ruta = ruta.replace('//','/')
+            if '//' not in ruta:
+                break
+        if ruta[-1] == '/':
+            ruta = ruta[:-1]
+        ruta_split = ruta.split('/')
+        nombre = ruta_split[-1]
+        nombre_split = nombre.split('.')
+        if 1 < len(nombre_split):
+            nombre = '.'.join(nombre_split[:-1])
+            extension = nombre_split[-1]
+        else:
+            extension = ''
+
+        if len(ruta_split) == 1:
+            carpeta =''
+        else:
+            carpeta = '/'.join(ruta_split[:-1])
+
+        return carpeta,nombre,extension.lower()
+
+    lista_ordenada = []
+    lista_no_ordenada = [i for i in lista]
+    num = []
+    for lno in lista_no_ordenada:
+        _,nombre,_ = informacion_ruta(lno)
+        nu = num_inicio(nombre = nombre, fin = False)
+        if type(nu) == int:
+            num.append(nu)
+
+    num = sorted(num)
+    for n in num:
+        for lno in lista_no_ordenada:
+            _,nombre,_ = informacion_ruta(lno)
+            if n == num_inicio(nombre = nombre, fin = False):
+                lista_ordenada.append(lno)
+                lista_no_ordenada.remove(lno)
+                # num.remove(n)
+                # break
+        # num.append(num_inicio(nombre = nombre, fin = False))
+
+    num = []
+    for lno in lista_no_ordenada:
+        _,nombre,_ = informacion_ruta(lno)
+        nu = num_inicio(nombre = nombre, fin = True)
+        if type(nu) == int:
+            num.append(nu)
+
+    num = sorted(num)
+    for n in num:
+        for lno in lista_no_ordenada:
+            _,nombre,_ = informacion_ruta(lno)
+            if n == num_inicio(nombre = nombre, fin = True):
+                lista_ordenada.append(lno)
+                lista_no_ordenada.remove(lno)
+                # num.remove(n)
+                # break
+        # num.append(num_inicio(nombre = nombre, fin = False))
+    return lista_ordenada + lista_no_ordenada
+
+def Convertir_unit8(image):
+    image_show = np.clip(image, 0, 1)  # Asegurar que los valores estén entre 0 y 1
+    image_show = (image_show * 255).astype(np.uint8)  # Convertir a uint8
+    return image_show
+
+def show_image_matplotlib(path, Xc1=0, Xc2=2, Yc1=0, Yc2=2):
+
+    if os.path.isdir(path):
+        ruta_carpeta = path
+        archivos_carpeta = ordenar_lista_num(archivos(ruta = ruta_carpeta))
+        if archivos_carpeta == []:
+            return None
+
+        ruta_img = archivos_carpeta[0]
+        
+    elif os.path.isdir(path):
+        ruta_img = path
+
+    image = cv2.imread(ruta_img)
     fig, ax = plt.subplots(figsize=(5,5))
     ax.imshow(image, cmap='gray')
 
