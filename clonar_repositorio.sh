@@ -28,20 +28,10 @@ else
     REQ_FILE=$(find "$DIRECTORIO" -name "viz.py" 2>/dev/null | head -n 1)
     
     if [ -n "$REQ_FILE" ]; then
-        FRASE_ORIGINAL='def show(self, field=\"displacement\", component=(0, 0), frame=0, quiverdisp=False, **kwargs):'
-        FRASE_NUEVA='def show(self, field=\"displacement\", component=(0, 0), frame=0, quiverdisp=False, ruta_save=None, **kwargs):'
-        
-        sed -i "s|$FRASE_ORIGINAL|$FRASE_NUEVA|g" "$REQ_FILE"
 
-        FRASE_ORIGINAL='keyword \= field.replace(\" \", \"\").lower()'
-        FRASE_NUEVA='keyword \= field.replace(\" \", \"\").lower()'$'\n''        plt.figure(figsize=(10, 10))'
-
-        sed -i "s|$FRASE_ORIGINAL|$FRASE_NUEVA|g" "$REQ_FILE"
-        
-        FRASE_ORIGINAL='plt.show()'
-        FRASE_NUEVA='if isinstance(ruta_save, str): plt.savefig(ruta_save, dpi=300)'
-
-        sed -i "s|$FRASE_ORIGINAL|$FRASE_NUEVA|g" "$REQ_FILE"
+        sed -i 's|def show(self, field=\"displacement\", component=(0, 0), frame=0, quiverdisp=False, \*\*kwargs):|def show(self, field=\"displacement\", component=(0, 0), frame=0, quiverdisp=False, ruta_save=None, **kwargs):|g' "$REQ_FILE"
+        sed -i 's|keyword = field.replace(" ", "").lower()|keyword = field.replace(" ", "").lower()\n        plt.figure(figsize=(10, 10))|g' "$REQ_FILE"
+        sed -i 's|plt.show()|if isinstance(ruta_save, str): plt.savefig(ruta_save, dpi=300)|g' "$REQ_FILE"
     fi
 fi
 
