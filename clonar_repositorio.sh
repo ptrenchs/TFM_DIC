@@ -33,8 +33,8 @@ else
         
         sed -i "s|$FRASE_ORIGINAL|$FRASE_NUEVA|g" "$REQ_FILE"
 
-        FRASE_ORIGINAL='keyword = field.replace(\" \", \"\").lower()'
-        FRASE_NUEVA='keyword = field.replace(\" \", \"\").lower()'$'\n''        plt.figure(figsize=(10, 10))'
+        FRASE_ORIGINAL='keyword \= field.replace(\" \", \"\").lower()'
+        FRASE_NUEVA='keyword \= field.replace(\" \", \"\").lower()'$'\n''        plt.figure(figsize=(10, 10))'
 
         sed -i "s|$FRASE_ORIGINAL|$FRASE_NUEVA|g" "$REQ_FILE"
         
