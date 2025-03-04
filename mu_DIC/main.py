@@ -116,10 +116,10 @@ def show_image_matplotlib(path, Xc1=0, Xc2=2, Yc1=0, Yc2=2):
         
     elif os.path.isdir(path):
         ruta_img = path
-
-    image = cv2.rotate(cv2.imread(ruta_img), cv2.ROTATE_180)
+    image = cv2.imread(ruta_img)
+    # image = cv2.rotate(image, cv2.ROTATE_180)
     fig, ax = plt.subplots(figsize=(5,5))
-    ax.imshow(image, cmap='gray')
+    ax.imshow(image, cmap='gray', origin="lower")
 
     # Crear rectángulo
     x, y = Xc1, Yc1  # Esquina inferior izquierda
