@@ -214,3 +214,36 @@ def procesado_muDIC(path, rectangulo):
         out.write(frame)
     out.release()
 
+def video_to_frame(path):
+
+    ruta_carp,nombre_arch, _ = informacion_ruta(ruta = path)
+    new_ruta_carpeta = crear_carpeta(ruta_carp + '/' + nombre_arch)
+    # Crear una carpeta para guardar los frames
+    output_folder = 'frames'
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    # Abrir el video
+    cap = cv2.VideoCapture(path)
+
+    fps = cap.get(cv2.CAP_PROP_FPS)
+
+    # Contador de frames
+    frame_count = 1
+
+    num_frame = 0
+    # Leer y guardar cada frame
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if not ret:
+            break
+        # Guardar el frame
+        if num_frame % int(fps/2) == 0:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            frame_filename = new_ruta_carpeta + '/' + f'frame_{frame_count}.jpg'
+            cv2.imwrite(frame_filename, frame)
+            frame_count += 1
+        num_frame += 1
+
+    # Liberar recursos
+    cap.release()
