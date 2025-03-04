@@ -36,6 +36,13 @@ else
         sed -i 's|keyword = field.replace(" ", "").lower()|keyword = field.replace(" ", "").lower()\n        plt.figure(figsize=(10, 10))|g' "$REQ_FILE"
         sed -i 's|plt.show()|if isinstance(ruta_save, str): plt.savefig(ruta_save, dpi=300)|g' "$REQ_FILE"
     fi
+
+    REQ_FILE_1=$(find "$DIRECTORIO" -name "image_stack.py" 2>/dev/null | head -n 1)
+    
+    if [ -n "$REQ_FILE_1" ]; then
+
+        sed -i 'img = io.imread(self._image_paths_[index]).astype(self.precision)[::-1,:]|img = io.imread(self._image_paths_[index]).astype(self.precision)|g' "$REQ_FILE"
+    fi
 fi
 
     
