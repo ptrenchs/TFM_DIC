@@ -41,7 +41,7 @@ else
     
     if [ -n "$REQ_FILE_1" ]; then
 
-        sed -i 's|precision)\[::-1,:]|precision) # \[::-1,:]|g' "$REQ_FILE"
+        sed -i 's|precision)\[::-1,:]|precision) # \[::-1,:]|g' "$REQ_FILE_1"
     fi
 fi
 
