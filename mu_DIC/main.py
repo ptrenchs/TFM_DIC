@@ -218,10 +218,6 @@ def video_to_frame(path):
 
     ruta_carp,nombre_arch, _ = informacion_ruta(ruta = path)
     new_ruta_carpeta = crear_carpeta(ruta_carp + '/' + nombre_arch)
-    # Crear una carpeta para guardar los frames
-    output_folder = 'frames'
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
 
     # Abrir el video
     cap = cv2.VideoCapture(path)
@@ -240,7 +236,7 @@ def video_to_frame(path):
         # Guardar el frame
         if num_frame % int(fps/2) == 0:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            frame_filename = new_ruta_carpeta + '/' + f'frame_{frame_count}.jpg'
+            frame_filename = new_ruta_carpeta + '/' + f'frame_{frame_count}.png'
             cv2.imwrite(frame_filename, frame)
             frame_count += 1
         num_frame += 1
