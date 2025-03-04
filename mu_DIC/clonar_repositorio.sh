@@ -41,7 +41,7 @@ else
     
     if [ -n "$REQ_FILE_1" ]; then
 
-        sed -i 'img = io.imread(self._image_paths_[index]).astype(self.precision)[::-1,:]|img = io.imread(self._image_paths_[index]).astype(self.precision)|g' "$REQ_FILE"
+        sed -i '[::-1,:]|# [::-1,:]|g' "$REQ_FILE"
     fi
 fi
 
