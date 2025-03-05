@@ -228,9 +228,9 @@ def video_to_frame(path,ips = 'all'):
     # Contador de frames
     frame_count = 1
     if ips == 'all':
-        ips = fps
+        ips = int(fps)
     elif fps < ips:
-        ips = fps
+        ips = int(fps)
     else:
         ips = int(fps/int(ips))
     num_frame = 0
@@ -240,7 +240,7 @@ def video_to_frame(path,ips = 'all'):
         if not ret:
             break
         # Guardar el frame
-        if num_frame % int(fps/2) == 0:
+        if num_frame % ips == 0:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             frame_filename = new_ruta_carpeta + '/' + f'frame_{frame_count}.png'
             cv2.imwrite(frame_filename, frame)
