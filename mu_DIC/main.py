@@ -169,7 +169,7 @@ def archivos(ruta):
 # path = r"/content/muDIC/Examples/example_data" # Ruta donde se ubica les imagenes en formato ".tif"
 
 
-def procesado_muDIC(path, rectangulo):
+def procesado_muDIC(path, rectangulo, campo = "displacement"):
 
     Xc1, Xc2, Yc1, Yc2 = rectangulo
     if os.path.isdir(path):
@@ -195,12 +195,12 @@ def procesado_muDIC(path, rectangulo):
     
     # ruta = crear_carpeta(ruta = '/content/Resoltado')
     ruta_ = crear_carpeta(ruta_carpeta + '/Resoltado')
-
-    ruta_salida = ruta_ + '.mp4'
+    ruta_carpeta_video = crear_carpeta(ruta_carpeta + '/videos')
+    ruta_salida = ruta_carpeta_video + '/' + os.path.basename(ruta_carpeta) + '_Resoltado' + '.mp4'
 
     for i in range(len(image_stack)):
         try:
-            viz.show(field="True strain", frame = i, ruta_save= ruta_ + '/' + f"frame_{i+1}.png")
+            viz.show(field = campo, frame = i, ruta_save = ruta_ + '/' + f"frame_{i+1}.png")
         except:
             break
         frame = cv2.imread(ruta_ + '/' + f"frame_{i+1}.png")
@@ -213,7 +213,7 @@ def procesado_muDIC(path, rectangulo):
             out = cv2.VideoWriter(ruta_salida, fourcc, fps, frame_size)
         out.write(frame)
     out.release()
-
+    return ruta_carpeta_video
 def video_to_frame(path):
 
     ruta_carp,nombre_arch, _ = informacion_ruta(ruta = path)
@@ -243,3 +243,4 @@ def video_to_frame(path):
 
     # Liberar recursos
     cap.release()
+    return new_ruta_carpeta
