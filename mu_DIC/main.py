@@ -215,7 +215,7 @@ def procesado_muDIC(path, rectangulo, campo = "displacement"):
         out.write(frame)
     out.release()
     return ruta_carpeta_video
-def video_to_frame(path):
+def video_to_frame(path,ips = 'all'):
 
     ruta_carp,nombre_arch, _ = informacion_ruta(ruta = path)
     new_ruta_carpeta = crear_carpeta(ruta_carp + '/' + nombre_arch)
@@ -227,7 +227,12 @@ def video_to_frame(path):
 
     # Contador de frames
     frame_count = 1
-
+    if ips == 'all':
+        ips = fps
+    elif fps < ips:
+        ips = fps
+    else:
+        ips = int(fps/int(ips))
     num_frame = 0
     # Leer y guardar cada frame
     while cap.isOpened():
