@@ -195,7 +195,8 @@ def procesado_muDIC(path, rectangulo, campo = "displacement"):
     
     # ruta = crear_carpeta(ruta = '/content/Resoltado')
     ruta_ = crear_carpeta(ruta_carpeta + '/Resoltado')
-    ruta_carpeta_video = crear_carpeta(ruta_carpeta + '/videos')
+    ruta_carpeta_carp, _, _ = informacion_ruta(ruta = ruta_carpeta)
+    ruta_carpeta_video = crear_carpeta(ruta_carpeta_carp + '/videos')
     ruta_salida = ruta_carpeta_video + '/' + os.path.basename(ruta_carpeta) + '_Resoltado' + '.mp4'
 
     for i in range(len(image_stack)):
