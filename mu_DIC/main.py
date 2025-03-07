@@ -209,7 +209,7 @@ def procesado_muDIC(path, rectangulo, campo = "displacement"):
             height, width, _ = frame.shape
             # size = (width,height)
             fps = 10  # Cuadros por segundo
-            frame_size = (height, width)  # Tamaño del video (ancho, alto)
+            frame_size = (width, height)  # Tamaño del video (ancho, alto)
             fourcc = cv2.VideoWriter_fourcc(*'mp4v')
             out = cv2.VideoWriter(ruta_salida, fourcc, fps, frame_size)
         out.write(frame)
