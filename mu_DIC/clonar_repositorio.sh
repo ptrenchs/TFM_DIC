@@ -37,12 +37,12 @@ else
         sed -i 's|plt.show()|if isinstance(ruta_save, str): plt.savefig(ruta_save, dpi=300)|g' "$REQ_FILE"
     fi
 
-    REQ_FILE_1=$(find "$DIRECTORIO" -name "image_stack.py" 2>/dev/null | head -n 1)
+    # REQ_FILE_1=$(find "$DIRECTORIO" -name "image_stack.py" 2>/dev/null | head -n 1)
     
-    if [ -n "$REQ_FILE_1" ]; then
+    # if [ -n "$REQ_FILE_1" ]; then
 
-        sed -i 's|precision)\[::-1,:]|precision) # \[::-1,:]|g' "$REQ_FILE_1"
-    fi
+    #     sed -i 's|precision)\[::-1,:]|precision) # \[::-1,:]|g' "$REQ_FILE_1"
+    # fi
 fi
 
     
