@@ -30,3 +30,5 @@ while(1):
 
 cap.release()
 cv2.destroyAllWindows()
+
+print(cv2.__doc__)
