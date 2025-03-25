@@ -4,7 +4,7 @@ class optical_flow:
     def encontrar(cordenadas, valor_ref, matriz):
         i,j = cordenadas
         if matriz[i][j] == valor_ref:
-            return [i,j]
+            return [i,j],0,0
         nxn = 1
 
         while True:
